@@ -50,11 +50,9 @@ public class UsuarioServiceImpl implements UsuarioService{
         if(id == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Código de autorização nulo!");
         }
-        Optional<Autorizacao> autOp = autRepo.findById(id);
-        if(autOp.isEmpty()) {
+        return autRepo.findById(id).orElseThrow(() -> {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Autorização não existe!"); 
-        }
-        return autOp.get();
+        });
     }
 
     @Override
