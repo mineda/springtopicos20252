@@ -2,6 +2,8 @@ package br.gov.sp.fatec.springtopicos20252.entity;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -24,6 +26,7 @@ public class Autorizacao {
     private String nome;
 
     @ManyToMany(mappedBy = "autorizacoes", fetch = FetchType.LAZY)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Set<Usuario> usuarios;
 
     public Long getId() {
