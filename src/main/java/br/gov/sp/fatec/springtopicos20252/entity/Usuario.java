@@ -1,5 +1,6 @@
 package br.gov.sp.fatec.springtopicos20252.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -41,6 +42,11 @@ public class Usuario {
             joinColumns = {@JoinColumn(name = "usr_id")},
             inverseJoinColumns = {@JoinColumn(name = "aut_id")})
     private Set<Autorizacao> autorizacoes;
+
+    public Usuario() {
+        setAnotacoes(new HashSet<Anotacao>());
+        setAutorizacoes(new HashSet<Autorizacao>());
+    }
 
     public Long getId() {
         return id;

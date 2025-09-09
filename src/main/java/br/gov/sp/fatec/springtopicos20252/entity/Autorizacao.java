@@ -1,5 +1,6 @@
 package br.gov.sp.fatec.springtopicos20252.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -28,6 +29,10 @@ public class Autorizacao {
     @ManyToMany(mappedBy = "autorizacoes", fetch = FetchType.LAZY)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Set<Usuario> usuarios;
+
+    public Autorizacao() {
+        setUsuarios(new HashSet<Usuario>());
+    }
 
     public Long getId() {
         return id;
