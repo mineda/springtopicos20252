@@ -9,6 +9,8 @@ import br.gov.sp.fatec.springtopicos20252.entity.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
 
+    public Optional<Usuario> findByNome(String nome);
+
     public Optional<Usuario> findByNomeAndSenha(String nome, String senha);
 
     @Query("select u from Usuario u where u.nome = ?1 and u.senha = ?2")
