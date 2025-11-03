@@ -1,6 +1,5 @@
 package br.gov.sp.fatec.springtopicos20252.service;
 
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.security.core.userdetails.User;

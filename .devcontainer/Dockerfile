@@ -1,7 +1,7 @@
 FROM mcr.microsoft.com/devcontainers/java:1-17-bookworm
 
 ARG INSTALL_MAVEN="true"
-ARG MAVEN_VERSION=""
+ARG MAVEN_VERSION="3.9.11"
 
 ARG INSTALL_GRADLE="false"
 ARG GRADLE_VERSION=""

@@ -69,13 +69,20 @@ public class UsuarioServiceImpl implements UsuarioService{
     }
 
     @Override
-    @PreAuthorize("isAuthenticated()")
     public Usuario buscarPeloId(Long id) {
         Optional<Usuario> usuarioOp = repo.findById(id);
         if(usuarioOp.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não existe!");
         }
         return usuarioOp.get();
+    }
+
+    @Override
+    @PreAuthorize("isAuthenticated()")
+    public Usuario buscarPorNomeESenha(String nome, String Senha) {
+        return repo.buscarPorNomeESenha(nome, Senha).orElseThrow(() -> {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        });
     }
     
 }

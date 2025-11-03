@@ -5,7 +5,7 @@ volumes:
 
 services:
   app:
-    container_name: javadev
+    container_name: javadevtop
     build: 
       context: .
       dockerfile: Dockerfile
@@ -14,7 +14,7 @@ services:
         POSTGRES_PASSWORD: postgres
         POSTGRES_USER: postgres
         POSTGRES_DB: postgres
-        POSTGRES_HOSTNAME: postgresdb
+        POSTGRES_HOSTNAME: postgresdbtop
 
     volumes:
       - ../..:/workspaces:cached
@@ -29,11 +29,11 @@ services:
     # (Adding the "ports" property to this file will not forward from a Codespace.)
 
   db:
-    container_name: postgresdb
-    image: postgres:latest
+    container_name: postgresdbtop
+    image: postgres:18
     restart: unless-stopped
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      - postgres-data:/var/lib/postgresql/18/docker
     environment:
       # NOTE: POSTGRES_DB/USER/PASSWORD should match values in app container
       POSTGRES_PASSWORD: postgres
