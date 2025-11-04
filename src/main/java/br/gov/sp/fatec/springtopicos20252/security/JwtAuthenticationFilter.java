@@ -13,7 +13,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 
 @Component
 public class JwtAuthenticationFilter extends GenericFilterBean {
@@ -38,8 +37,9 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
             }
             chain.doFilter(request, response);
         } catch (Throwable t) {
-            HttpServletResponse servletResponse = (HttpServletResponse) response;
-            servletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, t.getMessage());
+            // Se ocorrer qualquer erro na interpretação do token, segue adiante
+            // Por não estar autenticado, irá gerar erro se tentar acessar algo protegido
+            chain.doFilter(request, response);
         }
     }
   
