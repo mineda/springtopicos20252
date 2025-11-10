@@ -45,5 +45,12 @@ public class TrabalhoServiceImpl implements TrabalhoService{
     public List<Trabalho> buscarPorTituloENomeUsuario(String titulo, String nomeUsuario) {
         return trabalhoRepo.buscarPorTituloENomeUsuario(titulo, nomeUsuario);
     }
-    
+
+    @Override
+    public Trabalho buscarPorId(Long id) {
+        return trabalhoRepo.findById(id).orElseThrow(() -> {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Trabalho não encontrado!");
+        });
+    }
+
 }
