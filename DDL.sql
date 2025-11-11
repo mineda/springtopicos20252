@@ -102,4 +102,33 @@ insert into rev_revisao (rev_feedback, rev_data_hora_criacao, rev_data_hora_corr
   values ('Somente título', '2025-10-20 11:00', '2025-10-27 23:05', 1),
          ('E o resto?', current_timestamp, null, 2);
 
+create table lst_lista (
+  lst_id bigint generated always as identity,
+  lst_descricao varchar(100) not null,
+  lst_data_hora_verificacao timestamp,
+  lst_comentario_verificacao varchar(100),
+  lst_ant_id bigint not null,
+  primary key (lst_id),
+  foreign key (lst_ant_id) references ant_anotacao (ant_id) on delete restrict on update cascade
+);
+
+insert into lst_lista (lst_descricao, lst_data_hora_verificacao, lst_comentario_verificacao, lst_ant_id)
+  values ('Periféricos', '2023-08-13 11:20', 'Caro', 1),
+         ('Montagem', null, null, 1);
+
+create table itm_item (
+  itm_id bigint generated always as identity,
+  itm_descricao varchar(150) not null,
+  itm_perc_desconto int,
+  itm_preco numeric(10,2) not null,
+  itm_lst_id bigint not null,
+  primary key (itm_id),
+  foreign key (itm_lst_id) references lst_lista (lst_id) on delete restrict on update cascade
+);
+
+insert into itm_item (itm_descricao, itm_perc_desconto, itm_preco, itm_lst_id)
+  values ('Motherboard', 20, 999.9, 1),
+         ('Processador', null, 1500.0, 1);
+
+
 grant update, delete, insert, select on all tables in schema public to spring;
