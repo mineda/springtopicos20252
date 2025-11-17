@@ -130,5 +130,32 @@ insert into itm_item (itm_descricao, itm_perc_desconto, itm_preco, itm_lst_id)
   values ('Motherboard', 20, 999.9, 1),
          ('Processador', null, 1500.0, 1);
 
+create table est_estoque (
+  est_id bigint generated always as identity,
+  est_nome varchar(256) not null unique,
+  est_data_hora timestamp not null,
+  est_usr_id bigint not null,
+  primary key (est_id),
+  foreign key (est_usr_id) references usr_usuario(usr_id)
+);
+
+insert into est_estoque(est_nome, est_data_hora, est_usr_id)
+  values ('Hardware', '2023-08-01 07:15', 1),
+         ('Comida', '2025-08-01 19:10', 1);
+
+create table prd_produto (
+  prd_id bigint generated always as identity,
+  prd_descricao varchar(10) not null,
+  prd_data_hora timestamp not null,
+  prd_contador int,
+  prd_est_id bigint not null,
+  primary key (prd_id),
+  unique (prd_descricao, prd_est_id),
+  foreign key (prd_est_id) references est_estoque(est_id)
+);
+
+insert into prd_produto (prd_descricao, prd_data_hora, prd_contador, prd_est_id)
+  values ('Rizen 5', '2023-08-01 08:00', 5, 1),
+         ('Miojo', '2025-08-01 20:00', 2, 2);
 
 grant update, delete, insert, select on all tables in schema public to spring;
